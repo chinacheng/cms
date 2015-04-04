@@ -1,6 +1,10 @@
 package com.cms.bean;
 
-import com.cms.utils.Base64;
+import java.sql.SQLException;
+
+import com.cms.dao.RolesDao;
+import com.cms.utils.DBConnection;
+import com.mysql.jdbc.Connection;
 
 /**
  * 用户属性
@@ -83,6 +87,12 @@ public class UserBean {
         this.address = address;
     }
 
-   
+   public String getRoleName() throws SQLException{
+       Connection conn = (Connection) DBConnection.openConnection();
+       RolesDao dao = new RolesDao(conn);
+       RoleBean bean  = dao.getRole(String.valueOf(this.role_id));
+       conn.close();
+       return bean.getName();
+   }
 
 }

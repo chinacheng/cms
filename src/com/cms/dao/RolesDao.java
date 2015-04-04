@@ -61,6 +61,44 @@ public class RolesDao {
 		}
 		return list;
 	}
+	
+	
+	/**
+     * 获取一个角色
+     * @return
+     */
+    public RoleBean getRole(String id) {
+
+        RoleBean bean = null;
+        String sql = "select * from " + TABLE_NAME + " where id = " + id;
+        sql += ";";
+        PreparedStatement pps = null;
+        ResultSet res = null;
+        try {
+            pps = conn.prepareStatement(sql);
+            res = pps.executeQuery();
+            while (res.next()) {
+                bean = new RoleBean();
+                bean.setId(res.getInt("id"));
+                bean.setName(res.getString("name"));
+                bean.setDescription(res.getString("description"));
+            }
+            res.close();
+            pps.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            try {
+                res.close();
+                pps.close();
+                return null;
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+        return bean;
+    }
 
 	/**
 	 * 保存角色信息

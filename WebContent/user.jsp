@@ -6,6 +6,13 @@
 					+ path + "/";
 %>
 
+<%@ page import="com.cms.dao.RolesDao"%>
+<%@ page import="com.cms.bean.RoleBean"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
+<%@ page language="java" import="com.cms.utils.DBConnection"%>
+<%@ page language="java" import="java.sql.Connection"%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -33,9 +40,11 @@
 		var sex = $("#sex").find("option:selected").val();
 		var mobile = $("#mobile").val();
 		var address = $("#address").val();
-		var role_id = $("#role_id").val();
+		var role_id = $("#role_id").find("option:selected").val();
 
-		var param = "name=" + name + "&email=" + email + "&mobile=" + mobile + "&pwd=" + pwd+ "&sex=" + sex+ "&address=" + address+ "&role_id=" + role_id + "&type=1";
+		var param = "name=" + name + "&email=" + email + "&mobile=" + mobile
+				+ "&pwd=" + pwd + "&sex=" + sex + "&address=" + address
+				+ "&role_id=" + role_id + "&type=1";
 		if (name == "" || email == "") {
 			alert("名称/email不能为空，请填写");
 			return;
@@ -60,7 +69,7 @@
 </script>
 </head>
 
-<body style="margin: 20px">
+<body style="margin-left: 20px">
 	<form>
 		<input type="hidden" name='type' value="1"></input> <br /> <input
 			type="text" id="id" style="visibility: hidden;"></input>
@@ -80,9 +89,28 @@
 		<p>地址：</p>
 		<input type="text" id="address"></input> <br />
 		<p>角色：</p>
-		<input type="text" id="role_id"></input> <br /> <br /> <input
-			type="button" value="提交" onclick="upload_data();" /> <input
-			type="button" id="cancel" value="取消"
+		<%
+		    Connection conn = DBConnection.openConnection();
+		    RolesDao dao = new RolesDao(conn);
+		    List<RoleBean> list = new ArrayList<RoleBean>();
+		    list = dao.getRoleList();
+		    conn.close();
+		%>
+
+		<select id='role_id'>
+			<%
+			    for (int i = 0; i < list.size(); i++) {
+			%>
+			<%
+			    RoleBean mes = (RoleBean) list.get(i);
+			%>
+			<option value="<%=mes.getId()%>"><%=mes.getName()%></option>
+
+			<%
+			    }
+			%>
+		</select> <br /><br /> <input type="button" value="提交" onclick="upload_data();" />
+		<input type="button" id="cancel" value="取消"
 			onclick="window.open('users.jsp','_self');" />
 	</form>
 </body>

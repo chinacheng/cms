@@ -390,7 +390,7 @@ a:hover {
 					<span>*</span> 登录账号：
 				</div>
 				<input autofocus="autofocus" class="login-input username"
-					id="user_email" name="name" size="30" type="email" value="admin@test.com" />
+					id="user_email" name="name" size="30" type="email"  />
 			</div>
 			<div class="item">
 				<div class="labe w120">

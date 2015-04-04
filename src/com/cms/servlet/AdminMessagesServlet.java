@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cms.bean.LinkBean;
 import com.cms.bean.MessageBean;
-import com.cms.dao.LinksDao;
 import com.cms.dao.MessagesDao;
 import com.cms.json.ErrorJson;
 import com.cms.json.JsonHelper;

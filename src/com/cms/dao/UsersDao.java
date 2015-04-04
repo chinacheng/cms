@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cms.bean.RoleBean;
 import com.cms.bean.UserBean;
 import com.cms.utils.Base64;
 
@@ -67,9 +68,51 @@ public class UsersDao {
 		}
 		return list;
 	}
+	
+	/**
+     * 获取一个角色
+     * @return
+     */
+    public UserBean getUserByEmail(String email) {
+
+        UserBean bean = null;
+        String sql = "select * from " + TABLE_NAME + " where email = '" + email +"'";
+        sql += ";";
+        PreparedStatement pps = null;
+        ResultSet res = null;
+        try {
+            pps = conn.prepareStatement(sql);
+            res = pps.executeQuery();
+            while (res.next()) {
+                bean = new UserBean();
+                bean.setId(res.getInt("id"));
+                bean.setName(res.getString("name"));
+                bean.setPwd(res.getString("pwd"));
+                bean.setSex(res.getString("sex"));
+                bean.setEmail(res.getString("email"));
+                bean.setMobile(res.getString("mobile"));
+                bean.setAddress(res.getString("address"));
+                bean.setRole_id(res.getInt("role_id"));
+            }
+            res.close();
+            pps.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            try {
+                res.close();
+                pps.close();
+                return null;
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+        return bean;
+    }
 
 	/**
-	 * 保存链接信息
+	 * 保存用户信息
 	 * 
 	 * @param bean
 	 * @return

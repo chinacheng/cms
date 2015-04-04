@@ -1,5 +1,6 @@
 package com.cms.json;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.cms.bean.ArticleBean;
@@ -96,8 +97,9 @@ public class JsonHelper {
      * 
      * @param list
      * @return
+     * @throws SQLException 
      */
-    public static String getUsersJson(List<UserBean> list, String callback) {
+    public static String getUsersJson(List<UserBean> list, String callback) throws SQLException {
         JSONObject successJson = new JSONObject();
         successJson.put("result", 200);
         JSONArray array = new JSONArray();
@@ -111,7 +113,7 @@ public class JsonHelper {
             json.put("email", list.get(i).getEmail());
             json.put("mobile", list.get(i).getMobile());
             json.put("address", list.get(i).getAddress());
-            json.put("role_id", list.get(i).getAddress());
+            json.put("role_id", list.get(i).getRoleName());
             array.add(json);
         }
         successJson.put("data", array);

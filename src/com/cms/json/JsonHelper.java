@@ -8,6 +8,7 @@ import com.cms.bean.LinkBean;
 import com.cms.bean.MessageBean;
 import com.cms.bean.RoleBean;
 import com.cms.bean.UserBean;
+import com.cms.utils.Base64;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -105,7 +106,7 @@ public class JsonHelper {
             json = new JSONObject();
             json.put("id", list.get(i).getId());
             json.put("name", list.get(i).getName());
-            json.put("pwd", list.get(i).getPwd());
+            json.put("pwd", Base64.getFromBase64(list.get(i).getPwd()));
             json.put("sex", list.get(i).getSex());
             json.put("email", list.get(i).getEmail());
             json.put("mobile", list.get(i).getMobile());

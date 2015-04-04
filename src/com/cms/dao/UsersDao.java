@@ -7,18 +7,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cms.bean.LinkBean;
+import com.cms.bean.UserBean;
+import com.cms.utils.Base64;
 
 /**
  * 用户操作层
  * 
- * @author 302
+ * @author 
  * 
  */
 public class UsersDao {
 	private Connection conn = null;
 	// 表名
-	private final String TABLE_NAME = "links";
+	private final String TABLE_NAME = "users";
 
 	public UsersDao(Connection conn) {
 		this.conn = conn;
@@ -28,10 +29,10 @@ public class UsersDao {
 	 * 获取链接列表，不分页
 	 * @return
 	 */
-	public List<LinkBean> getLinkList() {
+	public List<UserBean> getUserList() {
 
-		List<LinkBean> list = new ArrayList<LinkBean>();
-		LinkBean bean = null;
+		List<UserBean> list = new ArrayList<UserBean>();
+		UserBean bean = null;
 		String sql = "select * from " + TABLE_NAME;
 		PreparedStatement pps = null;
 		ResultSet res = null;
@@ -39,10 +40,15 @@ public class UsersDao {
 			pps = conn.prepareStatement(sql);
 			res = pps.executeQuery();
 			while (res.next()) {
-				bean = new LinkBean();
+				bean = new UserBean();
 				bean.setId(res.getInt("id"));
 				bean.setName(res.getString("name"));
-				bean.setUrl(res.getString("url"));
+				bean.setPwd(res.getString("pwd"));
+				bean.setSex(res.getString("sex"));
+				bean.setEmail(res.getString("email"));
+				bean.setMobile(res.getString("mobile"));
+				bean.setAddress(res.getString("address"));
+				bean.setRole_id(res.getInt("role_id"));
 				list.add(bean);
 			}
 			res.close();
@@ -68,16 +74,20 @@ public class UsersDao {
 	 * @param bean
 	 * @return
 	 */
-	public boolean saveLink(LinkBean bean) {
+	public boolean saveUser(UserBean bean) {
 		String sql = "insert into "
 				+ TABLE_NAME
-				+ " (name,url) values(?,?)";
+				+ " (name, pwd, sex, email, mobile, address, role_id) values(?,?,?,?,?,?,?)";
 		PreparedStatement pps = null;
 		try {
 			pps = conn.prepareStatement(sql);
 			pps.setString(1, bean.getName());
-			pps.setString(2, bean.getUrl());
-
+			pps.setString(2, Base64.getBase64(bean.getPwd()));
+			pps.setString(3, bean.getSex());
+			pps.setString(4, bean.getEmail());
+			pps.setString(5, bean.getMobile());
+			pps.setString(6, bean.getAddress());
+			pps.setInt(7, bean.getRole_id());
 			pps.executeUpdate();
 			pps.close();
 		} catch (SQLException e) {
@@ -102,7 +112,7 @@ public class UsersDao {
 	 * @param id
 	 * @return
 	 */
-	public boolean deleteLink(int id) {
+	public boolean deleteUser(int id) {
 		String sql = "delete from " + TABLE_NAME + " where id = ?";
 		PreparedStatement pps = null;
 

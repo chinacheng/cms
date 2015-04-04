@@ -44,11 +44,11 @@ public class UserBean {
     }
 
     public String getPwd() {
-        return Base64.getFromBase64(pwd);
+        return pwd;
     }
 
     public void setPwd(String pwd) {
-        this.pwd = Base64.getBase64(pwd);
+        this.pwd = pwd;
     }
 
     public String getSex() {

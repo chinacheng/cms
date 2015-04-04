@@ -123,7 +123,6 @@ public class MessagesDao {
 	 * @return
 	 */
 	public boolean saveMessageBean(MessageBean bean) {
-	    System.out.println("-===================================----");
 		String sql = "insert into "
 				+ TABLE_NAME
 				+ " (name,email,content,published) values(?,?,?,?)";

@@ -26,6 +26,7 @@
 					<li class='function'><a href="articles.jsp" target="mainFrame">文章管理</a></li>
 					<li class='function'><a href="images.jsp" target="mainFrame">图片管理</a></li>
 					<li class='function'><a href="links.jsp" target="mainFrame">友情链接</a></li>
+					<li class='function'><a href="admin_messages.jsp" target="mainFrame">留言管理</a></li>
 				</ul>
 			</div>
 

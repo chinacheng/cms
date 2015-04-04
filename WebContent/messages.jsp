@@ -22,7 +22,6 @@
 	    MessagesDao dao = new MessagesDao(conn);
 	    List<MessageBean> list = new ArrayList<MessageBean>();
 	    list = dao.getMessageBeanList(1, 30, null);
-	    System.out.println(list.size());
 	    conn.close();
 	%>
 

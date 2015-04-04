@@ -12,17 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cms.bean.LinkBean;
 import com.cms.bean.MessageBean;
+import com.cms.dao.LinksDao;
 import com.cms.dao.MessagesDao;
 import com.cms.json.ErrorJson;
 import com.cms.json.JsonHelper;
-import com.cms.json.SuccessJson;
 import com.cms.utils.DBConnection;
 
 /**
- * 增、删、改
+ * 留言链接服务端
  */
-public class MessagesOperateServlet extends HttpServlet {
+public class AdminMessagesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -32,7 +33,7 @@ public class MessagesOperateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// doPost(request, response);
+		doPost(request, response);
 	}
 
 	/**
@@ -50,66 +51,28 @@ public class MessagesOperateServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		Connection conn = null;
-		// 类型，增1删改查
-        String type = request.getParameter("type");
-        // id
-        String id = request.getParameter("id");
-        
-        String callback = request.getParameter("callback");
-        
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String content = request.getParameter("content");
-
+		String callback = request.getParameter("callback");
 
 		try {
 			conn = DBConnection.openConnection();
 			// 连接成功
 			if (conn != null) {
 				MessagesDao dao = new MessagesDao(conn);
-				MessageBean bean = new MessageBean();
-				bean.setName(name);
-				bean.setEmail(email);
-				bean.setContent(content);
-				bean.setPublished(System.currentTimeMillis());
-
-				// 增加
-				if (type.equals("1")) {
-					bean.setPublished(bean.getPublished());
-					if (dao.saveMessageBean(bean)){
-					    request.getRequestDispatcher("messages.jsp").forward(request,response);
-					  //out.write(SuccessJson.getSuccessJson(callback));
-					}else{
-					    //out.write(ErrorJson.getErrorJsonObject(300, callback));
-					}
-					
-					// 修改
-				} else if (type.equals("2")) {
-					bean.setId(Integer.parseInt(id));
-					bean.setPublished(System.currentTimeMillis());
-					dao.updateMessageBean(bean);
-					// out.write(SuccessJson.getSuccessJson(callback));
-					// 删除
-				} else if (type.equals("3")) {
-					dao.deleteMessageBean(Integer.parseInt(id));
-					out.write(SuccessJson.getSuccessJson(callback));
-					// 根据Id查询
-				} else if (type.equals(4 + "")) {
-					// List<MessageBean> list = new ArrayList<MessageBean>();
-					// list = dao.findMessageById(Integer.parseInt(id));
-					// out.write(JsonHelper.getMessagesJson(list, callback));
-				}
+				List<MessageBean> list = new ArrayList<MessageBean>();
+				list = dao.getMessageBeanList(1, 30, null);;
+				out.write(JsonHelper.getMessagesJson(list, callback));
 				conn.close();
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			// 连接数据库出错
+			e.printStackTrace();
 			try {
 				conn.close();
 			} catch (SQLException e1) {
 
 			}
-			// out.write(ErrorJson.getErrorJsonObject(400, callback).toString());
-		} 
+			out.write(ErrorJson.getErrorJsonObject(400, callback));
+		}
 	}
 }

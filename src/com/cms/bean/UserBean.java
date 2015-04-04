@@ -1,7 +1,6 @@
 package com.cms.bean;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.cms.utils.Base64;
 
 /**
  * 用户属性
@@ -11,22 +10,14 @@ import java.util.Date;
  */
 public class UserBean {
 
-    // id
     private int id;
-    // 文章标题
-    private String title;
-    // 文章简介
-    private String introduction;
-    // 文章作者
-    private String author;
-    // 内容
-    private String content;
-    // 发布时间
-    private long published;
-    // 修改时间
-    private long updated;
-    // 是否有效,默认为0，无效
-    private int isValid = 0;
+    private int role_id;
+    private String name;
+    private String pwd;
+    private String sex;
+    private String email;
+    private String mobile;
+    private String address;
 
     public int getId() {
         return id;
@@ -35,73 +26,63 @@ public class UserBean {
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public long getPublished() {
-        return published;
-    }
-
-    public void setPublished(long published) {
-        this.published = published;
-    }
-
-    public long getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(long updated) {
-        this.updated = updated;
-    }
-
-    public int getIsValid() {
-        return isValid;
-    }
-
-    public void setIsValid(int isValid) {
-        this.isValid = isValid;
-    }
-
-    public String getPublishedStringLong() {
-        String pattern = "yyyy-MM-dd HH:mm:ss";
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
-        return format.format(new Date(published));
-    }
     
-    public String getPublishedString() {
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
-        return format.format(new Date(published));
+    public int getRole_id() {
+        return role_id;
     }
+
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPwd() {
+        return Base64.getFromBase64(pwd);
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = Base64.getBase64(pwd);
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+   
 
 }

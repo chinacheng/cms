@@ -43,7 +43,38 @@
 		<url-pattern>/links</url-pattern>
 	</servlet-mapping>
 
+	
+    <servlet>
+        <servlet-name>link</servlet-name>
+        <servlet-class>com.cms.servlet.LinkOprateServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>link</servlet-name>
+        <url-pattern>/link</url-pattern>
+    </servlet-mapping>
+	
+	
+	<servlet>
+        <servlet-name>roles</servlet-name>
+        <servlet-class>com.cms.servlet.RolesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>roles</servlet-name>
+        <url-pattern>/roles</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>role</servlet-name>
+        <servlet-class>com.cms.servlet.RoleOprateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>role</servlet-name>
+        <url-pattern>/role</url-pattern>
+    </servlet-mapping>
+    
 	<servlet>
 		<servlet-name>admin_messages</servlet-name>
 		<servlet-class>com.cms.servlet.AdminMessagesServlet</servlet-class>
@@ -52,16 +83,6 @@
 	<servlet-mapping>
 		<servlet-name>admin_messages</servlet-name>
 		<url-pattern>/admin_messages</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>link</servlet-name>
-		<servlet-class>com.cms.servlet.LinkOprateServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>link</servlet-name>
-		<url-pattern>/link</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

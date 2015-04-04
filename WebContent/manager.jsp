@@ -23,6 +23,8 @@
 			<div class="left">
 				<div class="des">功能列表</div>
 				<ul class='functions'>
+					<li class='function'><a href="users.jsp" target="mainFrame">用户管理</a></li>
+					<li class='function'><a href="roles.jsp" target="mainFrame">角色管理</a></li>
 					<li class='function'><a href="articles.jsp" target="mainFrame">文章管理</a></li>
 					<li class='function'><a href="images.jsp" target="mainFrame">图片管理</a></li>
 					<li class='function'><a href="links.jsp" target="mainFrame">友情链接</a></li>

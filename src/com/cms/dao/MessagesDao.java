@@ -10,7 +10,7 @@ import java.util.List;
 import com.cms.bean.MessageBean;
 
 /**
- * 留言的操作层
+ * 留言操作层
  * 
  * @author 302
  * 

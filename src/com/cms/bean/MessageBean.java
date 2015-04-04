@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * 留言
  * 
- * @desc 
+ * @content 
  * 
  */
 public class MessageBean {
@@ -18,7 +18,7 @@ public class MessageBean {
     // 留言email
     private String email;
 
-    private String desc;
+    private String content;
     // 内容
 
     private long published;
@@ -48,12 +48,12 @@ public class MessageBean {
         this.email = email;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getContent() {
+        return content;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setContent(String content) {
+        this.content = content;
     }
 
 

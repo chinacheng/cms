@@ -57,7 +57,7 @@ public class MessagesOperateServlet extends HttpServlet {
         
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
-		String desc = request.getParameter("desc");
+		String content = request.getParameter("content");
 
 
 		try {
@@ -68,7 +68,7 @@ public class MessagesOperateServlet extends HttpServlet {
 				MessageBean bean = new MessageBean();
 				bean.setName(name);
 				bean.setEmail(email);
-				bean.setDesc(desc);
+				bean.setContent(content);
 				bean.setPublished(System.currentTimeMillis());
 
 				// 增加
@@ -105,6 +105,8 @@ public class MessagesOperateServlet extends HttpServlet {
 
 			}
 			// out.write(ErrorJson.getErrorJsonObject(400, callback).toString());
+		} finally {
+		    request.getRequestDispatcher("messages.jsp").forward(request,response);
 		}
 	}
 }

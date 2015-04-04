@@ -53,10 +53,10 @@ public class MessagesDao {
 			while (res.next()) {
 				bean = new MessageBean();
 				bean.setId(res.getInt("id"));
-				bean.setName(res.getString("title"));
-				bean.setDesc(res.getString("desc"));
+				bean.setName(res.getString("name"));
+				bean.setContent(res.getString("content"));
 				bean.setEmail(res.getString("email"));
-				bean.setPublished(res.getLong("published_time"));
+				bean.setPublished(res.getLong("published"));
 				list.add(bean);
 			}
 			res.close();
@@ -95,9 +95,9 @@ public class MessagesDao {
                 bean = new MessageBean();
                 bean.setId(res.getInt("id"));
                 bean.setName(res.getString("name"));
-                bean.setDesc(res.getString("desc"));
+                bean.setContent(res.getString("content"));
                 bean.setEmail(res.getString("email"));
-                bean.setPublished(res.getLong("published_time"));
+                bean.setPublished(res.getLong("published"));
             }
             res.close();
             pps.close();
@@ -123,18 +123,21 @@ public class MessagesDao {
 	 * @return
 	 */
 	public boolean saveMessageBean(MessageBean bean) {
+	    System.out.println("-===================================----");
 		String sql = "insert into "
 				+ TABLE_NAME
-				+ " (name,email,desc,published_time) values(?,?,?,?,?)";
+				+ " (name,email,content,published) values(?,?,?,?)";
 		PreparedStatement pps = null;
 		System.out.println(bean.getId() + ","+ bean.getName() + "," + bean.getEmail() + "," 
-				+ bean.getDesc() + "," + bean.getPublished());
+				+ bean.getContent() + "," + bean.getPublished());
 		try {
 			pps = conn.prepareStatement(sql);
+			System.out.println(sql);
 			pps.setString(1, bean.getName());
 			pps.setString(2, bean.getEmail());
-			pps.setString(3, bean.getDesc());
-			pps.setLong(4, bean.getPublished());
+			pps.setString(3, bean.getContent());
+		    pps.setLong(4, bean.getPublished());
+		    
 			pps.executeUpdate();
 			pps.close();
 		} catch (SQLException e) {
@@ -160,7 +163,7 @@ public class MessagesDao {
 	public boolean updateMessageBean(MessageBean bean) {
 		String sql = "update "
 				+ TABLE_NAME
-				+ " set name=? , eamil = ? , desc = ? , published_time = ? ";
+				+ " set name=? , eamil = ? , content = ? , published = ? ";
 		PreparedStatement pps = null;
 //		System.out.println(bean.getId() + ","+ bean.getTitle() + "," + bean.getIntroduction() + "," + bean.getAuthor() + "," + bean.getContent() + "," + bean.getIsValid());
 
@@ -168,7 +171,7 @@ public class MessagesDao {
 			pps = conn.prepareStatement(sql);
 			pps.setString(1, bean.getName());
 			pps.setString(2, bean.getEmail());
-			pps.setString(3, bean.getDesc());
+			pps.setString(3, bean.getContent());
 			pps.setLong(4, bean.getPublished());
 
 			pps.executeUpdate();
@@ -239,8 +242,8 @@ public class MessagesDao {
 				bean.setId(res.getInt("id"));
 				bean.setName(res.getString("title"));
 				bean.setEmail(res.getString("introduction"));
-				bean.setDesc(res.getString("content"));
-				bean.setPublished(res.getLong("published_time"));
+				bean.setContent(res.getString("content"));
+				bean.setPublished(res.getLong("published"));
 				list.add(bean);
 			}
 			res.close();
@@ -256,4 +259,5 @@ public class MessagesDao {
 		}
 		return list;
 	}
+	
 }

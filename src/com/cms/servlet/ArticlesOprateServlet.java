@@ -108,7 +108,7 @@ public class ArticlesOprateServlet extends HttpServlet {
 				}
 				conn.close();
 				
-				request.getRequestDispatcher("messages.jsp").forward(request,response);
+				
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

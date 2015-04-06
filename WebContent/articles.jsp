@@ -52,7 +52,9 @@
 														+ result.data[a].author
 														+ "</td><td>"
 														+ (result.data[a].isvalid == 1 ? '是' : '否')
-														+ "</td><td><input type='button' value='删除' onclick='deleteArticle("
+														+ "</td><td><input type='button' value='修改' onclick='editArticle("
+                                                        + result.data[a].id
+                                                        + ",2);'/><input type='button' value='删除' onclick='deleteArticle("
 														+ result.data[a].id
 														+ ",3);'/></td></tr>";
 												$("#articles").append(tr);
@@ -83,6 +85,11 @@
 			}
 		});
 	}
+	
+    function editArticle(id, type) {
+        window.location.href = "/CMS/article_edit.jsp?id=" + id;
+        // window.location.href();
+    }
 </script>
 </head>
 

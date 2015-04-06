@@ -103,7 +103,7 @@ public class ImagesDao {
 	 * @param id
 	 * @return
 	 */
-	public boolean deleteLink(int id) {
+	public boolean deleteImage(int id) {
 		String sql = "delete from " + TABLE_NAME + " where id = ?";
 		PreparedStatement pps = null;
 		String file = "select path from " + TABLE_NAME + " where id = ?";
@@ -113,12 +113,11 @@ public class ImagesDao {
 
 			ResultSet res = pps.executeQuery();
 			if (res.next()) {
-				if (new File("../webapps/root" + res.getString("path"))
-						.delete()) {
+
 					pps = conn.prepareStatement(sql);
 					pps.setInt(1, id);
 					pps.executeUpdate();
-				}
+			
 
 			}
 			res.close();

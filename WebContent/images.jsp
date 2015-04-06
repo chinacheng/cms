@@ -65,7 +65,7 @@
 	// 删除
 	function deleteLink(id, type) {
 		$.ajax({
-			url : "/CMS/image",
+			url : "/CMS/image_del",
 			type : 'get',
 			dataType : 'jsonp',
 			data : "type=" + type + "&id=" + id,

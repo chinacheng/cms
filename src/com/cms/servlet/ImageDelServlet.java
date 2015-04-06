@@ -29,8 +29,8 @@ import com.cms.utils.DBConnection;
 /**
  * Servlet implementation class UploadPhotoServlet
  */
-@WebServlet("/UploadPhotoServlet")
-public class ImageOprateServlet extends HttpServlet {
+@WebServlet("/DelPhotoServlet")
+public class ImageDelServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -60,69 +60,9 @@ public class ImageOprateServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String title = "";
         String photodesc = "";
-        String type = "";
+        String type = request.getParameter("type");
         String sss = "";
 
-        request.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
-        // 为解析类提供配置信息
-        DiskFileItemFactory sfactory = new DiskFileItemFactory();
-        // 创建解析类的实例
-        ServletFileUpload ssfu = new ServletFileUpload(sfactory);
-        List<FileItem> sitems;
-        try {
-            sitems = ssfu.parseRequest(request);
-
-            System.out.println(sitems.size());
-
-            // 区分表单域
-            for (int i = 0; i < sitems.size(); i++) {
-                FileItem sitem = sitems.get(i);
-                // isFormField为true，表示这不是文件上传表单域
-                if (!sitem.isFormField()) {
-                    ServletContext sctx = getServletContext();
-                    String path = sctx.getRealPath("/upload");
-                    // 获得文件名
-                    String fileName = sitem.getName();
-                    System.out.println(fileName);
-                    // 该方法在某些平台(操作系统),会返回路径+文件名
-                    fileName = fileName
-                            .substring(fileName.lastIndexOf("/") + 1);
-                    File file = new File(path + "\\" + fileName);
-                    sss = "/upload/" + fileName;
-                    System.out.println(path + "\\" + fileName);
-                    if (!file.exists()) {
-                        sitem.write(file);
-                        // 将上传图片的名字记录到数据库中
-                        System.out.println("1111122222");
-                        response.sendRedirect("/CMS/images.jsp");
-                    }
-
-                    // System.out.println("<td>" + sitem.getFieldName() +
-                    // "</td>");
-                    // System.out.println("<td>" + sitem.getString() + "</td>");
-                } else {
-                    if (sitem.getFieldName().equals("title")) {
-                        title = sitem.getString();
-                    } else if (sitem.getFieldName().equals("description")) {
-                        photodesc = sitem.getString();
-                    } else if (sitem.getFieldName().equals("type")) {
-                        type = sitem.getString();
-                    }
-                    // System.out.println("<td>File</td>");
-                    // System.out.println("<td>" + sitem.getFieldName() + " / "
-                    // + sitem.getString() + " / " + sitem.getSize() + "</td>");
-                }
-              
-            }
-        } catch (FileUploadException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
  
         String callback = request.getParameter("callback");
         System.out.println(title + "," + photodesc);

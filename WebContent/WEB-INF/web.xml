@@ -144,4 +144,14 @@
         <servlet-name>user</servlet-name>
         <url-pattern>/user</url-pattern>
     </servlet-mapping>
+    
+        <servlet>
+        <servlet-name>image_del</servlet-name>
+        <servlet-class>com.cms.servlet.ImageDelServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>image_del</servlet-name>
+        <url-pattern>/image_del</url-pattern>
+    </servlet-mapping>
 </web-app>

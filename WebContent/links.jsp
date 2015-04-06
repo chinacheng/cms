@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>文章列表</title>
+<title>列表</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -50,7 +50,9 @@
 														+ result.data[a].name
 														+ "</td><td><a href='"+result.data[a].url+"' target='_blank'>"
 														+ result.data[a].url
-														+ "</td><td><input type='button' value='删除' onclick='deleteLink("
+														+ "</td><td><input type='button' value='修改' onclick='editLink("
+                                                        + result.data[a].id
+														+ ",2);'/><input type='button' value='删除' onclick='deleteLink("
 														+ result.data[a].id
 														+ ",3);'/></td></tr>";
 												$("#articles").append(tr);
@@ -80,6 +82,11 @@
 			}
 		});
 	}
+	
+    function editLink(id, type) {
+        window.location.href = "/CMS/link_edit.jsp?id=" + id;
+        // window.location.href();
+    }
 </script>
 </head>
 

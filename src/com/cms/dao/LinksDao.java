@@ -12,7 +12,7 @@ import com.cms.bean.LinkBean;
 /**
  * 友情链接的操作层
  * 
- * @author 302
+ * @author 
  * 
  */
 public class LinksDao {
@@ -125,5 +125,76 @@ public class LinksDao {
 
 		return true;
 	}
+	
+	/**
+     * 获取一个友情链接
+     * @return
+     */
+    public LinkBean getLink(String id) {
+
+        LinkBean bean = null;
+        String sql = "select * from " + TABLE_NAME + " where id = " + id;
+        sql += ";";
+        PreparedStatement pps = null;
+        ResultSet res = null;
+        try {
+            pps = conn.prepareStatement(sql);
+            res = pps.executeQuery();
+            while (res.next()) {
+                bean = new LinkBean();
+                bean.setId(res.getInt("id"));
+                bean.setName(res.getString("name"));
+                bean.setUrl(res.getString("url"));
+            }
+            res.close();
+            pps.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            try {
+                res.close();
+                pps.close();
+                return null;
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+        return bean;
+    }
+    
+    /**
+     * 修改说明信息
+     * 
+     * @param bean
+     * @return
+     */
+    public boolean updateLink(LinkBean bean) {
+        String sql = "update "
+                + TABLE_NAME
+                + " set name = ?, url =? where id = ?";
+        PreparedStatement pps = null;
+        try {
+            pps = conn.prepareStatement(sql);
+            pps.setString(1, bean.getName());
+            pps.setString(2, bean.getUrl());
+            pps.setInt(3, bean.getId());
+            pps.executeUpdate();
+            pps.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            try {
+                pps.close();
+                return false;
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+
+        return true;
+    }
+
 	
 }

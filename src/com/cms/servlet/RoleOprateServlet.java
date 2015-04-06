@@ -74,9 +74,13 @@ public class RoleOprateServlet extends HttpServlet {
 						out.write(ErrorJson.getErrorJsonObject(300, callback));
 					// 修改
 				} else if (type.equals("2")) {
-					// dao.updateArticle(bean);
-					// out.write(callback + "("
-					// +SuccessJson.getSuccessJson().toString()+ ")");
+                    bean.setId(Integer.valueOf(id));
+                    bean.setName(name);
+                    bean.setDescription(description);
+                    if (dao.updateRole(bean))
+                        out.write(SuccessJson.getSuccessJson(callback));
+                    else
+                        out.write(ErrorJson.getErrorJsonObject(300, callback));
 					// 删除
 				} else if (type.equals("3")) {
 					dao.deleteRole(Integer.parseInt(id));

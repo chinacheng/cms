@@ -50,7 +50,9 @@
 														+ result.data[a].name
 														+ "</td><td>"
                                                         + result.data[a].description
-														+ "</td><td><input type='button' value='删除' onclick='deleteRole("
+                                                        + "</td><td><input type='button' value='修改' onclick='editRole("
+                                                        + result.data[a].id
+                                                        + ",2);'/><input type='button' value='删除' onclick='deleteRole("
 														+ result.data[a].id
 														+ ",3);'/></td></tr>";
 												$("#articles").append(tr);
@@ -80,6 +82,11 @@
 			}
 		});
 	}
+	
+	   function editRole(id, type) {
+	        window.location.href = "/CMS/role_edit.jsp?id=" + id;
+	        // window.location.href();
+	    }
 </script>
 </head>
 

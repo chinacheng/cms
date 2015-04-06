@@ -131,6 +131,39 @@ public class RolesDao {
 
 		return true;
 	}
+	
+	/**
+     * 修改角色信息
+     * 
+     * @param bean
+     * @return
+     */
+    public boolean updateRole(RoleBean bean) {
+        String sql = "update "
+                + TABLE_NAME
+                + " set name = ?, description =? where id = ?";
+        PreparedStatement pps = null;
+        try {
+            pps = conn.prepareStatement(sql);
+            pps.setString(1, bean.getName());
+            pps.setString(2, bean.getDescription());
+            pps.setInt(3, bean.getId());
+            pps.executeUpdate();
+            pps.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            try {
+                pps.close();
+                return false;
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+
+        return true;
+    }
 
 
 	/**

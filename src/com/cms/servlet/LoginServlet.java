@@ -1,7 +1,6 @@
 package com.cms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -43,7 +42,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Access-Control-Allow-Origin", "*");
-        PrintWriter out = response.getWriter();
+        // PrintWriter out = response.getWriter();
 
         String name = request.getParameter("name");
         String password = request.getParameter("password");

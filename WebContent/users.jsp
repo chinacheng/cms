@@ -62,7 +62,7 @@
 														+ result.data[a].role_id
 														+ "</td><td><input type='button' value='修改' onclick='editUser("
 														+ result.data[a].id
-														+ ",3);'/><input type='button' value='删除' onclick='deleteUser("
+														+ ",2);'/><input type='button' value='删除' onclick='deleteUser("
 														+ result.data[a].id
 														+ ",3);'/></td></tr>";
 												$("#articles").append(tr);

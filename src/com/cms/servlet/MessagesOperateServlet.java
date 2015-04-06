@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cms.bean.MessageBean;
 import com.cms.dao.MessagesDao;
-import com.cms.json.ErrorJson;
-import com.cms.json.JsonHelper;
 import com.cms.json.SuccessJson;
 import com.cms.utils.DBConnection;
 

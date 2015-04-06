@@ -1,17 +1,23 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
-	String path = request.getContextPath();
+    String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+					+ request.getServerName() + ":" + request.getServerPort()
+					+ path + "/";
 %>
+
+<%@ page import="com.cms.dao.RolesDao"%>
+<%@ page import="com.cms.bean.RoleBean"%>
+
+<%@ page language="java" import="com.cms.utils.DBConnection"%>
+<%@ page language="java" import="java.sql.Connection"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <base href="<%=basePath%>">
 
-<title>角色列表</title>
+<title>用户</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -27,12 +33,13 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
 	function upload_data() {
+		var id = $("#id").val();
 		var name = $("#name").val();
-		var url = $("#description").val();
+		var description = $("#description").val();
 
-		var param = "name=" + name + "&description=" + url + "&type=1";
-		if (name == "" || url == "") {
-			alert("名称/链接不能为空，请填写");
+		var param = "id=" + id + "&name=" + name + "&description=" + description + "&type=2";
+		if (name == "" || description == "") {
+			alert("名称/描述不能为空，请填写");
 			return;
 		}
 		$.ajax({
@@ -52,21 +59,30 @@
 			}
 		});
 	}
-	
 </script>
 </head>
+<%@ page import="com.cms.dao.RolesDao"%>
+<%@ page import="com.cms.bean.RoleBean"%>
+<%
+    String id = request.getParameter("id");
+    Connection uconn = DBConnection.openConnection();
+    RolesDao udao = new RolesDao(uconn);
+    RoleBean bean = udao.getRole(id);
+    uconn.close();
+%>
 
-<body style="margin: 20px">
+
+<body style="margin-left: 20px">
 	<form>
-		<input type="text" id="id" style="visibility: hidden;"></input>
+		<input type="hidden" name='type' value="2"></input> <br /> 
+		<input type="text" id="id" style="visibility: hidden;" value="<%=bean.getId()%>"></input>
 		<p>名称：</p>
-		<input type="text" id="name"></input> <br />
-		<p>说明：</p>
-		<textarea id="description" name="description" style="width: 400px; height: 50px"
-			rows="2" cols=""></textarea>
-		<br /> <input type="button" value="提交" onclick="upload_data();" /> <input
-			type="button" id="cancel" value="取消"
-			onclick="window.open('roles.jsp','_self');" />
+		<input type="text" id="name" value="<%=bean.getName()%>"></input> <br />
+		<p>描述：</p>
+		<input type="text" id="description" value="<%=bean.getDescription()%>"></input>
+         <br /> <br /> <input type="button" value="提交"
+			onclick="upload_data();" /> <input type="button" id="cancel"
+			value="取消" onclick="window.open('roles.jsp','_self');" />
 	</form>
 </body>
 </html>

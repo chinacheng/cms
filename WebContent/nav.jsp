@@ -11,7 +11,6 @@
 		<ul>
 			<li class=""><a href="/CMS/">首页</a></li>
 			<li class=""><a href="news.jsp">行业新闻</a></li>
-			<li class=""><a href="news.jsp">最新公告</a></li>
 			<li class=""><a href="signs.jsp">企业风采</a></li>
 			<li class=""><a href="job.jsp">诚聘英才</a></li>
 			<li class=""><a href="about.jsp">关于我们</a></li>

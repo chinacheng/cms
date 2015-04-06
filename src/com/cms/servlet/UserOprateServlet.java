@@ -17,7 +17,7 @@ import com.cms.json.SuccessJson;
 import com.cms.utils.DBConnection;
 
 /**
- * 文章增、删、改
+ * 用户增、删、改
  */
 public class UserOprateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -85,9 +85,18 @@ public class UserOprateServlet extends HttpServlet {
 						out.write(ErrorJson.getErrorJsonObject(300, callback));
 					// 修改
 				} else if (type.equals("2")) {
-					// dao.updateArticle(bean);
-					// out.write(callback + "("
-					// +SuccessJson.getSuccessJson().toString()+ ")");
+				    bean.setId(Integer.valueOf(id));
+                    bean.setName(name);
+                    bean.setPwd(pwd);
+                    bean.setSex(sex);
+                    bean.setEmail(email);
+                    bean.setMobile(mobile);
+                    bean.setAddress(address);
+                    bean.setRole_id(Integer.valueOf(role_id));
+                    if (dao.updateUser(bean))
+                        out.write(SuccessJson.getSuccessJson(callback));
+                    else
+                        out.write(ErrorJson.getErrorJsonObject(300, callback));
 					// 删除
 				} else if (type.equals("3")) {
 					dao.deleteUser(Integer.parseInt(id));

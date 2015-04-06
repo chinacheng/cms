@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.cms.bean.RoleBean;
 import com.cms.bean.UserBean;
 import com.cms.utils.Base64;
 
@@ -70,13 +69,55 @@ public class UsersDao {
 	}
 	
 	/**
-     * 获取一个角色
+     * 获取一个用户
      * @return
      */
     public UserBean getUserByEmail(String email) {
 
         UserBean bean = null;
         String sql = "select * from " + TABLE_NAME + " where email = '" + email +"'";
+        sql += ";";
+        PreparedStatement pps = null;
+        ResultSet res = null;
+        try {
+            pps = conn.prepareStatement(sql);
+            res = pps.executeQuery();
+            while (res.next()) {
+                bean = new UserBean();
+                bean.setId(res.getInt("id"));
+                bean.setName(res.getString("name"));
+                bean.setPwd(res.getString("pwd"));
+                bean.setSex(res.getString("sex"));
+                bean.setEmail(res.getString("email"));
+                bean.setMobile(res.getString("mobile"));
+                bean.setAddress(res.getString("address"));
+                bean.setRole_id(res.getInt("role_id"));
+            }
+            res.close();
+            pps.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            try {
+                res.close();
+                pps.close();
+                return null;
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+        return bean;
+    }
+    
+    /**
+     * 通过获取一个用户
+     * @return
+     */
+    public UserBean getUserById(Integer id) {
+
+        UserBean bean = null;
+        String sql = "select * from " + TABLE_NAME + " where id = '" + id +"'";
         sql += ";";
         PreparedStatement pps = null;
         ResultSet res = null;
@@ -147,6 +188,44 @@ public class UsersDao {
 
 		return true;
 	}
+	
+	/**
+     * 修改用户信息
+     * 
+     * @param bean
+     * @return
+     */
+    public boolean updateUser(UserBean bean) {
+        String sql = "update "
+                + TABLE_NAME
+                + " set name = ?, pwd = ?, sex = ?, email = ?, mobile = ?, address = ?, role_id =? where id=?";
+        PreparedStatement pps = null;
+        try {
+            pps = conn.prepareStatement(sql);
+            pps.setString(1, bean.getName());
+            pps.setString(2, Base64.getBase64(bean.getPwd()));
+            pps.setString(3, bean.getSex());
+            pps.setString(4, bean.getEmail());
+            pps.setString(5, bean.getMobile());
+            pps.setString(6, bean.getAddress());
+            pps.setInt(7, bean.getRole_id());
+            pps.setInt(8, bean.getId());
+            pps.executeUpdate();
+            pps.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            try {
+                pps.close();
+                return false;
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+
+        return true;
+    }
 
 
 	/**

@@ -1,9 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+    String path = request.getContextPath();
+			String basePath = request.getScheme() + "://"
+					+ request.getServerName() + ":" + request.getServerPort()
+					+ path + "/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -11,7 +11,7 @@
 <head>
 <base href="<%=basePath%>">
 
-<title>文章列表</title>
+<title>用户列表</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -22,7 +22,7 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 <link href="css/manager.css" media="all" rel="stylesheet"
-    type="text/css" />
+	type="text/css" />
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.pagination.js"></script>
@@ -49,18 +49,20 @@
 														+ "</td><td>"
 														+ result.data[a].name
 														+ "</td><td>"
-                                                        + result.data[a].pwd
-                                                        + "</td><td>"
-                                                        + result.data[a].sex
-                                                        + "</td><td>"
-                                                        + result.data[a].email
-                                                        + "</td><td>"
-                                                        + result.data[a].mobile
-                                                        + "</td><td>"
-                                                        + result.data[a].address
-                                                        + "</td><td>"
-                                                        + result.data[a].role_id
-														+ "</td><td><input type='button' value='删除' onclick='deleteUser("
+														+ result.data[a].pwd
+														+ "</td><td>"
+														+ result.data[a].sex
+														+ "</td><td>"
+														+ result.data[a].email
+														+ "</td><td>"
+														+ result.data[a].mobile
+														+ "</td><td>"
+														+ result.data[a].address
+														+ "</td><td>"
+														+ result.data[a].role_id
+														+ "</td><td><input type='button' value='修改' onclick='editUser("
+														+ result.data[a].id
+														+ ",3);'/><input type='button' value='删除' onclick='deleteUser("
 														+ result.data[a].id
 														+ ",3);'/></td></tr>";
 												$("#articles").append(tr);
@@ -90,14 +92,19 @@
 			}
 		});
 	}
+
+	function editUser(id, type) {
+		window.location.href = "/CMS/user_edit.jsp?id=" + id;
+		// window.location.href();
+	}
 </script>
 </head>
 
 <body>
-    <div class='operates'>
-        <input type="button" value="新建"
-            onclick="window.open('user.jsp','_self');" />
-    </div>
+	<div class='operates'>
+		<input type="button" value="新建"
+			onclick="window.open('user.jsp','_self');" />
+	</div>
 
 	<table id="articles">
 		<tr>
@@ -109,7 +116,7 @@
 			<th>电话</th>
 			<th>地址</th>
 			<th>角色</th>
-			<th>操作</th>	
+			<th>操作</th>
 		</tr>
 	</table>
 

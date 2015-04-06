@@ -47,9 +47,9 @@
 														+ (a + 1)
 														+ "</td><td>"
 														+ result.data[a].title
-														+ "</td><td><a href='"
+														+ "</td><td><img src='/CMS/"
 														+ result.data[a].path
-														+ "'>"
+														+ "' height='100px'><br/>"
 														+ result.data[a].path
 														+ "</td><td><input type='button' value='删除' onclick='deleteLink("
 														+ result.data[a].id

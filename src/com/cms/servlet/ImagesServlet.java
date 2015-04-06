@@ -57,7 +57,7 @@ public class ImagesServlet extends HttpServlet {
 			if (conn != null) {
 				ImagesDao dao = new ImagesDao(conn);
 				List<ImageBean> list = new ArrayList<ImageBean>();
-				list = dao.getLinkList();
+				list = dao.getImageList();
 				out.write(JsonHelper.getImagesJson(list, callback));
 				conn.close();
 			}

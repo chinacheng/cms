@@ -135,7 +135,7 @@ public class JsonHelper {
             json = new JSONObject();
             json.put("id", list.get(i).getId());
             json.put("title", list.get(i).getTitle());
-            json.put("desc", list.get(i).getDesc());
+            json.put("desc", list.get(i).getDescription());
             json.put("path", list.get(i).getPath());
             array.add(json);
         }

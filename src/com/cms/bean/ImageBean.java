@@ -12,7 +12,7 @@ public class ImageBean {
 	// 标题
 	private String title;
 	// 描述
-	private String desc;
+	private String description;
 	// 路径
 	private String path;
 	
@@ -28,11 +28,11 @@ public class ImageBean {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String desc) {
+		this.description = desc;
 	}
 	public String getPath() {
 		return path;

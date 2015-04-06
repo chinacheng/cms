@@ -30,7 +30,7 @@ public class ImagesDao {
 	 * 
 	 * @return
 	 */
-	public List<ImageBean> getLinkList() {
+	public List<ImageBean> getImageList() {
 
 		List<ImageBean> list = new ArrayList<ImageBean>();
 		ImageBean bean = null;
@@ -44,7 +44,7 @@ public class ImagesDao {
 				bean = new ImageBean();
 				bean.setId(res.getInt("id"));
 				bean.setTitle(res.getString("title"));
-				bean.setDesc(res.getString("description"));
+				bean.setDescription(res.getString("description"));
 				bean.setPath(res.getString("path"));
 				list.add(bean);
 			}
@@ -78,7 +78,7 @@ public class ImagesDao {
 		try {
 			pps = conn.prepareStatement(sql);
 			pps.setString(1, bean.getTitle());
-			pps.setString(2, bean.getDesc());
+			pps.setString(2, bean.getDescription());
 			pps.setString(3, bean.getPath());
 			pps.executeUpdate();
 			pps.close();

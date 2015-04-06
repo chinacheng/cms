@@ -24,7 +24,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/ajaxfileupload.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+<!--  script type="text/javascript" src="js/ajaxfileupload.js"></script -->
 <script type="text/javascript">
 	function ajaxUpload() {
 		var title = $("#title").val();
@@ -60,22 +60,21 @@
 	<textarea id="goods_id" style="display: none"><%= request.getParameter("id") %></textarea>
 	<br />
 	<br />
-	<form id="form_upload" name="form_upload" action="" target=""
-		enctype="multipart/form-data">
+	<form id="form_upload" name="form_upload" action="/CMS/image" method="post" enctype="multipart/form-data">  
 		<div id="div_upload">
-			<label>标题:</label>
-			<input type="text" id="title"/>
+			<!-- label>标题:</label>
+			<   input type="text" id="title" name="title" -->
+			<input type="hidden" id="type" name="type" value='1' />
 			<p>
 				<strong>图片路径:</strong> <input type="file" id="file_image"
-					name="image" accept="image/*" style="width: 350px" onchange="">
+					name="path" accept="image/*" style="width: 350px" onchange="">
 			<p>
-				<label>图片描述:</label>
+				<!-- label>图片描述:</label>
 			<p>
 				<textarea id="picture_descr" name="description"
-					style="width: 400px; height: 50px" rows="6" cols=""></textarea>
+					style="width: 400px; height: 50px" rows="6" cols=""></textarea -->
 			<p>
-				<input type="button" id="upload_button" name="upload" value="上传"
-					onclick="ajaxUpload();">
+				<input type="submit" id="tmp_upload_button" name="tm_upload" value="上传"/>
 		</div>
 	</form>
 </body>
